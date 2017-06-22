@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import clipper from '../static/clipper'
 
 Vue.config.productionTip = false
+
+Vue.use(clipper)
 
 /* eslint-disable no-new */
 new Vue({

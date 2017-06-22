@@ -1,31 +1,24 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+      <img src="" alt="" id="img1">
+      <input type="file" accept="image/png,image/jpg,image/jpeg" @change="change($event)" data-type="1">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods : {
+    change( event ) {
+        let image = document.getElementById('img1');
+        this.clip(event , {
+          resultObj : image,
+          aspectRatio : 1
+        })
     }
   }
 }
@@ -33,21 +26,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+    img{
+        display: block;
+        width: 120px;
+        height: 120px;
+    }
+    h3{
+        text-align: center;
+    }
+    h1, h2 {
+      font-weight: normal;
+    }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
 
-a {
-  color: #42b983;
-}
+    a {
+      color: #42b983;
+    }
 </style>
