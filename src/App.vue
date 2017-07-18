@@ -31,10 +31,11 @@ export default {
 }
 img {
   display: block;
-  margin: 15% auto;
+  margin: 0 auto;
 }
-input{
+input[type='file']{
   outline: none;
+  margin-top: 20px;
 }
 *{
   margin: 0;
@@ -42,23 +43,25 @@ input{
 }
 #clip_button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 10%;
+  bottom: 20px;
   width: 80px;
   height: 40px;
   border:none;
   border-radius: 2px;
-  background:white;
+  background: #1AAD19;
+  color: #fff;
 }
 #cancel_clip{
   position: absolute;
-  right: 100px;
-  top: 10px;
+  left: 10%;
+  bottom: 20px;
   width: 80px;
   height: 40px;
   border:none;
   border-radius: 2px;
-  background:white;
+  color: #fff;
+  background:#E64340;
 }
 #clip_container.container {
   z-index: 99;
@@ -70,7 +73,15 @@ input{
   bottom: 0;
   background:rgba(0,0,0,1);
 }
-
+#clip_container.container > div{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
 #clip_image {
   max-width: 100%;
 }
@@ -87,7 +98,54 @@ input{
   -ms-touch-action: none;
   touch-action: none
 }
-
+.crop_loading , .crop_success {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+.crop_loading .crop_content{
+  position: absolute;
+  top: 50% ;
+  left: 50%;
+  text-align: center;
+  background: #000;
+  opacity: 0.9;
+  height: 100px;
+  width: 100px;
+  vertical-align: middle;
+  color: #fff;
+  padding-top: 20px;
+  font-size: 16px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.crop_loading .crop_content img{
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.crop_success .crop_success_text{
+  position: absolute;
+  top: 50% ;
+  left: 50%;
+  text-align: center;
+  background: #000;
+  opacity: 0.9;
+  width: 120px;
+  height: 30px;
+  color: #fff;
+  line-height: 30px;
+  font-size: 16px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
 .cropper-container img {
   /* Avoid margin top issue (Occur only when margin-top <= -height) */
   display: block;

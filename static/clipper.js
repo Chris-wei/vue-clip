@@ -32,12 +32,15 @@ export default {
       //初始化图片为空对象
       this.preview = null;
 
+      let str = '<div><img id="clip_image" src="originUrl"></div><button type="button" id="cancel_clip">取消</button><button type="button" id="clip_button">确定</button>';
+      str+= '<div class="crop_loading"><div class="crop_content"><img src="../static/loading.gif"><div class="crop_text">图片上传中</div></div></div>';
+      str+= '<div class="crop_success"><div class="crop_success_text">上传成功</div></div></div>';
+
       let body = document.getElementsByTagName('body')[0];
       this.reagion = document.createElement('div');
       this.reagion.id = 'clip_container';
       this.reagion.className = 'container';
-      this.reagion.innerHTML = '<div><img id="clip_image" src="originUrl"></div><button type="button" id="cancel_clip">取消</button><button type="button" id="clip_button">确定</button>';
-
+      this.reagion.innerHTML = str;
       //添加创建好的DOM元素
       body.appendChild(this.reagion);
       this.preview = document.getElementById('clip_image');
@@ -126,8 +129,7 @@ export default {
         this.resultObj.src = imgData;
         //图片上传
         this.postImg();
-        //裁剪完后摧毁对象
-        this.destoried();
+
       }else{
         image.onload = function () {
           //压缩处理
@@ -135,8 +137,7 @@ export default {
           self.resultObj.src = data;
           //图片上传
           self.postImg();
-          //裁剪完后摧毁对象
-          self.destoried();
+
         }
       }
     }
@@ -177,7 +178,14 @@ export default {
     //图片上传
     Vue.prototype.postImg = function() {
       //这边写图片的上传
-      console.log('上传')
+      let self = this;
+      document.querySelector('.crop_loading').style.display = 'block';
+      window.setTimeout(function () {
+        document.querySelector('.crop_loading').style.display = 'none';
+        document.querySelector('.crop_success').style.display = 'block';
+        //裁剪完后摧毁对象
+          self.destoried();
+      },3000)
     }
 
     //图片旋转
