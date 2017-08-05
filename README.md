@@ -25,7 +25,7 @@
 # 项目运行
 > 直接 npm install 安装依赖，然后 npm run dev
 
-ps：可以结合我这篇文章一起看看 [基于vue的移动端图片裁剪压缩](http://www.jianshu.com/writer#/notebooks/14926004/notes/15421644/preview)
+ps：可以结合我这篇文章一起看看 [基于vue的移动端图片裁剪压缩](http://www.jianshu.com/p/82dbf309f9b1)
 ## Build Setup
 
 ``` bash
