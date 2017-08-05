@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-      <img src="" alt="" id="img1">
-      <input type="file" accept="image/png,image/jpg,image/jpeg" @change="change($event)" data-type="1">
+      <img src="../assets/upload.png" alt="" id="img">
+      <input type="file" accept="image/png,image/jpg,image/jpeg" @change="change($event)">
   </div>
 </template>
 
@@ -9,12 +9,12 @@
 export default {
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+
     }
   },
   methods : {
     change( event ) {
-        let image = document.getElementById('img1');
+        let image = document.getElementById('img'); //预览对象
         this.clip(event , {
           resultObj : image,
           aspectRatio : 1

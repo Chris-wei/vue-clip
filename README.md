@@ -2,8 +2,12 @@
 
 > vue图片裁减压缩
 
+# 效果图
+   ![效果图](http://upload-images.jianshu.io/upload_images/6633377-72a12831c84f3f13.gif?imageMogr2/auto-orient/strip)
+
 # 项目描述
-> 基于vue的一款图片裁剪压缩工具，可以将用户上传的图片进行最小尺寸压缩，压缩完成后不大于100k，并转化成base64格式，可以直接放入img标签中
+> 基于vue的一款图片裁剪压缩工具，可以将用户上传的图片进行最小尺寸压缩，压缩完成后不大于100k，并转化成base64格式，可以直接放入img标签中，可以在控制台看出图片压缩信息
+   ![压缩信息](http://upload-images.jianshu.io/upload_images/6633377-3c5c4111e4df639b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # 项目依赖
 > cropperjs 第三方的一个裁剪库
@@ -20,6 +24,8 @@
 
 # 项目运行
 > 直接 npm install 安装依赖，然后 npm run dev
+
+ps：可以结合我这篇文章一起看看 [基于vue的移动端图片裁剪压缩](http://www.jianshu.com/writer#/notebooks/14926004/notes/15421644/preview)
 ## Build Setup
 
 ``` bash
