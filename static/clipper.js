@@ -115,31 +115,35 @@ export default {
       let image = new Image();
       let croppedCanvas;
       let roundedCanvas;
+
       // Crop
-      croppedCanvas = this.cropper.getCroppedCanvas();
-      // Round
-      roundedCanvas = this.getRoundedCanvas(croppedCanvas);
+      document.querySelector('.crop_loading').style.display = 'block';
 
-      let imgData = roundedCanvas.toDataURL();
+      setTimeout(function () {
+        croppedCanvas = self.cropper.getCroppedCanvas();
+        // Round
+        roundedCanvas = self.getRoundedCanvas(croppedCanvas);
 
-      image.src = imgData;
+        let imgData = roundedCanvas.toDataURL();
 
-      //判断图片是否大于100k,不大于直接上传，反之压缩
-      if( imgData.length < (100 * 1024) ){
-        this.resultObj.src = imgData;
-        //图片上传
-        this.postImg();
+        image.src = imgData;
 
-      }else{
-        image.onload = function () {
-          //压缩处理
-          let data = self.compress( image , self.Orientation );
-          self.resultObj.src = data;
+        //判断图片是否大于100k,不大于直接上传，反之压缩
+        if( imgData.length < (100 * 1024) ){
+          self.resultObj.src = imgData;
           //图片上传
           self.postImg();
 
+        }else{
+          image.onload = function () {
+            //压缩处理
+            let data = self.compress( image , self.Orientation );
+            self.resultObj.src = data;
+            //图片上传
+            self.postImg();
+          }
         }
-      }
+      },20)
     }
     //获取裁剪图片资源
     Vue.prototype.getRoundedCanvas = function(sourceCanvas) {
@@ -179,7 +183,8 @@ export default {
     Vue.prototype.postImg = function() {
       //这边写图片的上传
       let self = this;
-      document.querySelector('.crop_loading').style.display = 'block';
+      self.destoried();
+      return
       window.setTimeout(function () {
         document.querySelector('.crop_loading').style.display = 'none';
         document.querySelector('.crop_success').style.display = 'block';
