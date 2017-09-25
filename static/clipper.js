@@ -19,11 +19,27 @@ export default {
       this.resultObj = opt.resultObj;
       //初始化裁剪对象
       this.cropper = new Cropper( this.preview , {
-        aspectRatio : opt.aspectRatio ? opt.aspectRatio : 1,
+        aspectRatio : opt.aspectRatio || 1 ,
+        autoCropArea : opt.autoCropArea || 0.8 ,
         viewMode : 1,
+        guides : opt.aspectRatio == 'Free' ? false : true ,
+        cropBoxResizable : opt.aspectRatio == 'Free' ? false : true ,
+        cropBoxMovable : opt.aspectRatio == 'Free' ? false : true ,
+        dragCrop : opt.aspectRatio == 'Free' ? false : true ,
         background : false,
+        checkOrientation : true ,
+        checkCrossOrigin : true ,
         zoomable : false,
-        center : false
+        zoomOnWheel : false ,
+        center : false ,
+        toggleDragModeOnDblclick : false ,
+        ready : function () {
+          if( opt.aspectRatio == 'Free' ){
+            let cropBox = self.cropper.cropBox;
+            cropBox.querySelector('span.cropper-view-box').style.outline = 'none';
+            self.cropper.disable();
+          }
+        }
       });
 
     }
@@ -125,14 +141,13 @@ export default {
         roundedCanvas = self.getRoundedCanvas(croppedCanvas);
 
         let imgData = roundedCanvas.toDataURL();
-
         image.src = imgData;
 
         //判断图片是否大于100k,不大于直接上传，反之压缩
         if( imgData.length < (100 * 1024) ){
           self.resultObj.src = imgData;
           //图片上传
-          self.postImg();
+          self.postImg( imgData );
 
         }else{
           image.onload = function () {
@@ -140,7 +155,7 @@ export default {
             let data = self.compress( image , self.Orientation );
             self.resultObj.src = data;
             //图片上传
-            self.postImg();
+            self.postImg( data );
           }
         }
       },20)
@@ -180,12 +195,12 @@ export default {
       this.cropper = null;
     }
     //图片上传
-    Vue.prototype.postImg = function() {
+    Vue.prototype.postImg = function( imageData ) {
       //这边写图片的上传
       let self = this;
       self.destoried();
-      return
-      window.setTimeout(function () {
+
+      window.setTimeout( function () {
         document.querySelector('.crop_loading').style.display = 'none';
         document.querySelector('.crop_success').style.display = 'block';
         //裁剪完后摧毁对象
