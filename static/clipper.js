@@ -13,6 +13,7 @@ export default {
   install( Vue ){
     //初始化方法
     Vue.prototype.initilize = function( opt ){
+      let self = this;
       this.options = opt;
       //创建dom
       this.createElement();
@@ -34,6 +35,7 @@ export default {
         center : false ,
         toggleDragModeOnDblclick : false ,
         ready : function () {
+          // console.log(self.cropper.rotate(90))
           if( opt.aspectRatio == 'Free' ){
             let cropBox = self.cropper.cropBox;
             cropBox.querySelector('span.cropper-view-box').style.outline = 'none';
@@ -41,7 +43,6 @@ export default {
           }
         }
       });
-
     }
     //创建一些必要的DOM，用于图片裁剪
     Vue.prototype.createElement = function () {
@@ -100,9 +101,11 @@ export default {
       this.picValue = files[0];
 
       //去获取拍照时的信息，解决拍出来的照片旋转问题
-      Exif.getData( files , function(){
-        self.Orientation = Exif.getTag(this, 'Orientation');
-      });
+      // Exif.getData( files[0] , function(){
+      //   self.Orientation = Exif.getTag( files[0], 'Orientation');
+      //   console.log(self.Orientation)
+      // });
+
 
       //调用方法转成url格式
       this.originUrl = this.getObjectURL( this.picValue );
